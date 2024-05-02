@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
+import Providers from "@/lib/Providers/Providers";
+import ReduxProvider from "@/redux/provider/Provider";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +19,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+   
+      <Providers>
+        <html lang="en">
+          <body className={inter.className}>
+         <ReduxProvider>   <AntdRegistry>{children}</AntdRegistry></ReduxProvider>
+         <Toaster />
+          </body>
+
+        </html>
+      </Providers>
+    
   );
 }
